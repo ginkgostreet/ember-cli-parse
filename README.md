@@ -2,7 +2,7 @@
 This is an ember addon that includes and exposes the parse api and user object to ember routes and controllers
 
 ## Installation
-* ember install git://github.com/ginkgostreet/ember-cli-parse.git
+* `ember install git://github.com/ginkgostreet/ember-cli-parse.git`
 
 
 # Development
