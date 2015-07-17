@@ -1,4 +1,6 @@
+import Ember from 'ember';
 import config from '../config/environment';
+
 export default {
     name: 'parse-auth',
     //after: '',
@@ -6,12 +8,12 @@ export default {
         Parse.initialize(config.parse.appId, config.parse.javascriptKey);
         var pa = instance.container.lookup("parse-auth:main");
         pa.register_instance(instance);
-        
-        if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+
+        if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) || typeof facebookConnectPlugin === "undefined") {
             window.fbAsyncInit = function () {
                 Parse.FacebookUtils.init({ // this line replaces FB.init({
                     appId: config.parse.FacebookAppId, // Facebook App ID
-                    status: true,  // check Facebook Login status
+                    //status: false,  // check Facebook Login status
                     cookie: true,  // enable cookies to allow Parse to access the session
                     xfbml: false,  // initialize Facebook social plugins on the page
                     version: 'v2.3' // point to the latest Facebook Graph API version
@@ -21,16 +23,10 @@ export default {
             };
 
 
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {
-                    return;
-                }
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
+            Ember.$('body').append(Ember.$("<div>").attr('id', 'fb-root'));
+            Ember.$.ajaxSetup({ cache: true });
+            Ember.$.getScript('//connect.facebook.net/en_US/sdk.js');
+
         }
     }
 };
