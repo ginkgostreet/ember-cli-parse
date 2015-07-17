@@ -20,6 +20,11 @@ export function initialize(container, application) {
       this.set("loggedIn", false);
       callback(user, error);
     },
+    logout: function() {
+      Parse.User.logOut();
+      this.set("user", null);
+      this.set("loggedIn", false);
+    },
     authenticate: function(user, onSuccess, onError) {
       onSuccess = onSuccess || function() {};
       onError = onError || function(user, error) {console.log("Error: " + error.code + " " + error.message);}
