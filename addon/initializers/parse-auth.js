@@ -25,6 +25,9 @@ export function initialize(container, application) {
       this.set("user", null);
       this.set("loggedIn", false);
     },
+    passwordReset: function(email, options) {
+      Parse.User.requestPasswordReset(email, options);
+    },
     authenticate: function(user, onSuccess, onError) {
       onSuccess = onSuccess || function() {};
       onError = onError || function(user, error) {console.log("Error: " + error.code + " " + error.message);}
