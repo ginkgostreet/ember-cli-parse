@@ -6,7 +6,7 @@ export default {
     //after: '',
     initialize: function(instance) {
         Parse.initialize(config.parse.appId, config.parse.javascriptKey);
-        var pa = instance.container.lookup("parse-auth:main");
+        var pa = instance.container.lookup("service:parse-auth");
         pa.register_instance(instance);
 
         if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) || typeof facebookConnectPlugin === "undefined") {
