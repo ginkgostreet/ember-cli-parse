@@ -118,11 +118,11 @@ export function initialize(container, application) {
 
 
   });
-  application.register('parse-auth:main', authObject);
-  application.inject('route', 'parseAuth', 'parse-auth:main');
-  application.inject('controller', 'parseAuth', 'parse-auth:main');
-  application.inject('component', 'parseAuth', 'parse-auth:main');
-  application.inject('view', 'parseAuth', 'parse-auth:main');
+  application.register('service:parse-auth', authObject);
+  application.inject('route', 'parseAuth', 'service:parse-auth');
+  application.inject('controller', 'parseAuth', 'service:parse-auth');
+  application.inject('component', 'parseAuth', 'service:parse-auth');
+  application.inject('view', 'parseAuth', 'service:parse-auth');
 }
 
 export default {
