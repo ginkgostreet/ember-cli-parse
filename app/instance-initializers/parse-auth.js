@@ -25,7 +25,7 @@ export default {
 
             Ember.$('body').append(Ember.$("<div>").attr('id', 'fb-root'));
             Ember.$.ajaxSetup({ cache: true });
-            Ember.$.getScript('//connect.facebook.net/en_US/sdk.js');
+            Ember.$.getScript('https://connect.facebook.net/en_US/sdk.js');
 
         }
     }
