@@ -41,7 +41,7 @@ export function initialize(container, application) {
       this.fbSuccess = onSuccess || function() {};
       this.fbError = onError || function(user, error) {console.log(error);};
 
-      if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) && typeof facebookConnectPlugin === "Object") {
+      if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) && (typeof facebookConnectPlugin === "Object" || typeof facebookConnectPlugin === "object")) {
         this.authenticate_fb_cordova();
       }
       else {
@@ -67,7 +67,7 @@ export function initialize(container, application) {
       facebookConnectPlugin.login(['public_profile','email'],
           function(success) {
             if (success.status=='connected') {
-              expiration_date = (new Date(Date.now()+success.authResponse.expiresIn*1000)).toISOString();
+              var expiration_date = (new Date(Date.now()+success.authResponse.expiresIn*1000)).toISOString();
               var facebookAuthData = {
                 "id": success.authResponse.userID+"",
                 "access_token": success.authResponse.accessToken,
@@ -94,7 +94,7 @@ export function initialize(container, application) {
       var that = this;
       facebookConnectPlugin.api("me", ["email"],
           function(success) {
-            user = Parse.User.current();
+            var user = Parse.User.current();
             user.set("email", success.email);
             user.save();
             that.auth_success(that.fbSuccess, user);
