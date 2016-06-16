@@ -1,5 +1,6 @@
-export function initialize(container, application) {
+export function initialize(App) {
   var authObject = Ember.Object.extend({
+    isServiceFactory: true,
     user: null,
     loggedIn: false,
     register_instance: function(instance) {
@@ -118,11 +119,11 @@ export function initialize(container, application) {
 
 
   });
-  application.register('service:parse-auth', authObject);
-  application.inject('route', 'parseAuth', 'service:parse-auth');
-  application.inject('controller', 'parseAuth', 'service:parse-auth');
-  application.inject('component', 'parseAuth', 'service:parse-auth');
-  application.inject('view', 'parseAuth', 'service:parse-auth');
+  App.register('service:parse-auth', authObject);
+  App.inject('route', 'parseAuth', 'service:parse-auth');
+  App.inject('controller', 'parseAuth', 'service:parse-auth');
+  App.inject('component', 'parseAuth', 'service:parse-auth');
+  App.inject('view', 'parseAuth', 'service:parse-auth');
 }
 
 export default {
